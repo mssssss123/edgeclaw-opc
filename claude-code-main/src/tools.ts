@@ -11,6 +11,7 @@ import { NotebookEditTool } from './tools/NotebookEditTool/NotebookEditTool.js'
 import { WebFetchTool } from './tools/WebFetchTool/WebFetchTool.js'
 import { TaskStopTool } from './tools/TaskStopTool/TaskStopTool.js'
 import { BriefTool } from './tools/BriefTool/BriefTool.js'
+import { SendMessageTool } from './tools/SendMessageTool/SendMessageTool.js'
 // Dead code elimination: conditional import for ant-only tools
 /* eslint-disable custom-rules/no-process-env-top-level, @typescript-eslint/no-require-imports */
 const REPLTool =
@@ -72,9 +73,6 @@ const getTeamCreateTool = () =>
 const getTeamDeleteTool = () =>
   require('./tools/TeamDeleteTool/TeamDeleteTool.js')
     .TeamDeleteTool as typeof import('./tools/TeamDeleteTool/TeamDeleteTool.js').TeamDeleteTool
-const getSendMessageTool = () =>
-  require('./tools/SendMessageTool/SendMessageTool.js')
-    .SendMessageTool as typeof import('./tools/SendMessageTool/SendMessageTool.js').SendMessageTool
 /* eslint-enable @typescript-eslint/no-require-imports */
 import { AskUserQuestionTool } from './tools/AskUserQuestionTool/AskUserQuestionTool.js'
 import { LSPTool } from './tools/LSPTool/LSPTool.js'
@@ -235,7 +233,7 @@ export function getAllBaseTools(): Tools {
     ...(TerminalCaptureTool ? [TerminalCaptureTool] : []),
     ...(isEnvTruthy(process.env.ENABLE_LSP_TOOL) ? [LSPTool] : []),
     ...(isWorktreeModeEnabled() ? [EnterWorktreeTool, ExitWorktreeTool] : []),
-    getSendMessageTool(),
+    SendMessageTool,
     ...(ListPeersTool ? [ListPeersTool] : []),
     ...(isAgentSwarmsEnabled()
       ? [getTeamCreateTool(), getTeamDeleteTool()]
@@ -292,7 +290,7 @@ export const getTools = (permissionContext: ToolPermissionContext): Tools => {
         feature('COORDINATOR_MODE') &&
         coordinatorModeModule?.isCoordinatorMode()
       ) {
-        replSimple.push(TaskStopTool, getSendMessageTool())
+        replSimple.push(TaskStopTool, SendMessageTool)
       }
       return filterToolsByDenyRules(replSimple, permissionContext)
     }
@@ -304,7 +302,7 @@ export const getTools = (permissionContext: ToolPermissionContext): Tools => {
       feature('COORDINATOR_MODE') &&
       coordinatorModeModule?.isCoordinatorMode()
     ) {
-      simpleTools.push(AgentTool, TaskStopTool, getSendMessageTool())
+      simpleTools.push(AgentTool, TaskStopTool, SendMessageTool)
     }
     return filterToolsByDenyRules(simpleTools, permissionContext)
   }

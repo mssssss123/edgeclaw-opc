@@ -11,8 +11,10 @@
     "claude-dev": "src/entrypoints/cli.tsx"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "latest",
+    "@alcalzone/ansi-tokenize": "latest",
     "@anthropic-ai/bedrock-sdk": "latest",
+    "@anthropic-ai/sandbox-runtime": "^0.0.49",
+    "@anthropic-ai/sdk": "latest",
     "@anthropic-ai/vertex-sdk": "latest",
     "@aws-sdk/client-bedrock": "latest",
     "@aws-sdk/client-bedrock-runtime": "latest",
@@ -20,7 +22,6 @@
     "@aws-sdk/credential-provider-node": "latest",
     "@aws-sdk/credential-providers": "latest",
     "@azure/identity": "latest",
-    "@alcalzone/ansi-tokenize": "latest",
     "@commander-js/extra-typings": "latest",
     "@growthbook/growthbook": "latest",
     "@modelcontextprotocol/sdk": "latest",
@@ -55,6 +56,7 @@
     "cli-boxes": "latest",
     "cli-highlight": "latest",
     "code-excerpt": "latest",
+    "color-diff-napi": "^0.0.1",
     "commander": "latest",
     "diff": "latest",
     "emoji-regex": "latest",
@@ -102,17 +104,18 @@
     "zod": "latest"
   },
   "devDependencies": {
-    "@types/node": "latest",
-    "@types/react": "latest",
+    "@types/cacache": "latest",
     "@types/diff": "latest",
     "@types/lodash-es": "latest",
+    "@types/node": "latest",
+    "@types/proper-lockfile": "latest",
+    "@types/react": "latest",
     "@types/semver": "latest",
     "@types/shell-quote": "latest",
-    "@types/ws": "latest",
-    "@types/cacache": "latest",
-    "@types/proper-lockfile": "latest",
     "@types/turndown": "latest",
+    "@types/ws": "latest",
     "bun-types": "latest",
+    "tsx": "^4.21.0",
     "typescript": "latest"
   }
 }
